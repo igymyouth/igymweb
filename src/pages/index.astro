@@ -7,6 +7,16 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import LOGO from "../media/logo.png"
+import img1 from "../media/img1.jpeg"
+import img2 from "../media/img2.jpeg"
+import img3 from "../media/img3.jpeg"
+import img4 from "../media/img4.jpeg"
+import img5 from "../media/img5.jpeg"
+import img6 from "../media/img6.jpeg"
+import img7 from "../media/img7.jpeg"
+import img8 from "../media/img8.jpeg"
+
 
 const log = [
   { k: "Founded", v: "2023" },
@@ -16,14 +26,14 @@ const log = [
 ];
 
 const logImages = [
-  { src: "/src/media/img1.jpeg"},
-  { src: "/src/media/img2.jpeg"},
-  { src: "/src/media/img3.jpeg"},
-  { src: "/src/media/img4.jpeg"},
-  { src: "/src/media/img5.jpeg"},
-  { src: "/src/media/img6.jpeg"},
-  { src: "/src/media/img7.jpeg"},
-  { src: "/src/media/img8.jpeg"},
+  { src: img1.src},
+  { src: img2.src},
+  { src: img3.src},
+  { src: img4.src},
+  { src: img5.src},
+  { src: img6.src},
+  { src: img7.src},
+  { src: img8.src},
 ];
 
 // Approximate country centroids for chapter markers — swap in precise
@@ -65,7 +75,34 @@ I-GYM program was launched during IESO 2024, and since then, we have been commit
         </div>
       </div>
       <div class="hero-visual">
-        <CoreSample />
+       <div
+  class="core"
+  role="img"
+  aria-label="International Geoscience Youth Movement Logo"
+>
+  <img src={LOGO.src} alt="IGYM Logo" class="core-logo" />
+</div>
+
+<style>
+  .core {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .core-logo {
+    width: min(100%, 380px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 20px rgba(27, 44, 54, 0.18));
+  }
+
+  @media (max-width: 640px) {
+    .core-logo {
+      width: min(100%, 240px);
+    }
+  }
+</style>
       </div>
     </div>
   </section>
@@ -100,7 +137,7 @@ I-GYM program was launched during IESO 2024, and since then, we have been commit
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
         </div>
-         <p class="eyebrow">Field log</p>
+         <p class="eyebrow"></p>
         <!--<h2>The core sample, dated.</h2>
         <p>A running record of the movement, kept the way a geologist keeps a core log — depth, layer, note.</p> -->
       </div>
