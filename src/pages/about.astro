@@ -27,11 +27,9 @@ const values = [
   <section class="intro">
     <div class="container intro-inner">
       <p class="eyebrow">About IGYM</p>
-      <h1>A youth movement, laid down in layers.</h1>
-      <p class="lede">
-        IGYM exists so that the curiosity sparked by a good geoscience teacher — or a good olympiad —
-        doesn't stop the moment the exam ends. We're a student-run network that keeps young geoscientists
-        mapping, measuring, and organising together, year after year.
+      <h1>Grounded in Science and Driven by Youth.</h1>
+      <p class="lede" style="text-align: justify;">
+       The International Geoscience Education Organisation (IGEO), the global organization that hosts the International Earth Science Olympiad (IESO), also leads several flagship initiatives aimed at strengthening Earth Science education worldwide. One of its key initiatives is the International Geoscience Youth Movement (I-GYM), a global program that inspires and empowers young geoscience enthusiasts through inquiry-based, experiential learning. By promoting hands-on scientific exploration, collaboration, and innovation, I-GYM nurtures the next generation of Earth Scientists and Environmental Leaders across the world.
       </p>
     </div>
   </section>
@@ -41,15 +39,15 @@ const values = [
   <section class="mission" style="background: var(--paper);">
     <div class="container mission-inner">
       <div>
-        <p class="eyebrow">Mission</p>
-        <h2>Keep the network running after the closing ceremony.</h2>
-        <p>Most geoscience olympiads and school programmes end the moment the medals are handed out. IGYM is the part that continues: chapters that meet monthly, mentors who stay in touch, and a straight line from a first rock-identification badge to a research placement or an olympiad team.</p>
+        <p class="eyebrow">Our Global Mission</p>
+        <h2>Promoting Inquiry-Based Earth Science Learning</h2>
+        <p>To spread inquiry-based Cognitive learning in Earth Science education built upon the Earth Systems Approach, ensuring access to environmental education at all school levels and in all parts of the world. Creating transformative opportunities for young individuals to engage with nature, cultures and people in such a way as to promote care and responsibility towards Earth Science Education System. </p>
       </div>
-      <div>
+      <!-- <div>
         <p class="eyebrow">Partnership with IGEO</p>
         <h2>Built by olympiad alumni, open to everyone.</h2>
         <p>IGYM was founded by former International Geoscience Olympiad (IGEO) competitors and remains close to that community — many regional coordinators are IGEO alumni or current national-team mentors. Membership, though, is open to any student with curiosity about the earth, whether or not they've ever sat an olympiad paper.</p>
-      </div>
+      </div> -->
     </div>
   </section>
 
@@ -73,40 +71,16 @@ const values = [
     </div>
   </section>
 
-  <FaultLine from="var(--stone)" to="var(--slate)" />
-
-  <section class="timeline dark">
-    <div class="container">
-      <p class="eyebrow">Ten years, dated like a core log</p>
-      <h2>How the movement formed.</h2>
-      <ol class="timeline-list">
-        {timeline.map((t) => (
-          <li class="timeline-row">
-            <span class="timeline-year">{t.year}</span>
-            <div>
-              <h3>{t.title}</h3>
-              <p>{t.copy}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <FaultLine from="var(--slate)" to="var(--paper)" flip />
+  
 
   <section class="values" style="background: var(--paper);">
     <div class="container">
       <p class="eyebrow">What we hold to</p>
       <h2>Our values, in practice.</h2>
-      <div class="values-grid">
-        {values.map((v) => (
-          <div class="card">
-            <h3>{v.title}</h3>
-            <p>{v.copy}</p>
-          </div>
-        ))}
-      </div>
+      
+       <div>
+        
+        <p style="text-align: justify;">At I-GYM, we inspire curiosity through the Earth Systems Approach and the "Stimulating the Learning Instinct" technique. Our youth leaders engage in various outreach programs and hands-on workshops that prepare them to become ambassadors of Earth Science Education. Through interactive learning experiences in schools, universities, and educational institutions, we nurture informed, empathetic, and responsible global citizens with a strong appreciation for our planet.</p></div>
     </div>
   </section>
 </Layout>

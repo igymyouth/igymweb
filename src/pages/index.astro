@@ -3,10 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import CoreSample from "../components/CoreSample.astro";
 import Contours from "../components/Contours.astro";
 import FaultLine from "../components/FaultLine.astro";
-import 'leaflet/dist/leaflet.css';
-
-
-
+import "maplibre-gl/dist/maplibre-gl.css";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const log = [
   { k: "Founded", v: "2023" },
@@ -15,13 +15,47 @@ const log = [
   { k: "Chapters", v: "19" },
 ];
 
+const logImages = [
+  { src: "/src/media/img1.jpeg"},
+  { src: "/src/media/img2.jpeg"},
+  { src: "/src/media/img3.jpeg"},
+  { src: "/src/media/img4.jpeg"},
+  { src: "/src/media/img5.jpeg"},
+  { src: "/src/media/img6.jpeg"},
+  { src: "/src/media/img7.jpeg"},
+  { src: "/src/media/img8.jpeg"},
+];
+
+// Approximate country centroids for chapter markers — swap in precise
+// chapter coordinates later if you have them.
+const chapterMarkers = [
+  { name: "India", members: 18, lat: 20.5937, lng: 78.9629 },
+  { name: "Sri Lanka", members: 13, lat: 7.8731, lng: 80.7718 },
+  { name: "China", members: 4, lat: 35.8617, lng: 104.1954 },
+  { name: "Israel", members: 4, lat: 31.0461, lng: 34.8516 },
+  { name: "Romania", members: 4, lat: 45.9432, lng: 24.9668 },
+  { name: "Austria", members: 3, lat: 47.5162, lng: 14.5501 },
+  { name: "Indonesia", members: 2, lat: -0.7893, lng: 113.9213 },
+  { name: "USA", members: 2, lat: 37.0902, lng: -95.7129 },
+  { name: "Australia", members: 1, lat: -25.2744, lng: 133.7751 },
+  { name: "Belarus", members: 1, lat: 53.7098, lng: 27.9534 },
+  { name: "Czech Republic", members: 1, lat: 49.8175, lng: 15.4730 },
+  { name: "Estonia", members: 1, lat: 58.5953, lng: 25.0136 },
+  { name: "France", members: 1, lat: 46.2276, lng: 2.2137 },
+  { name: "Germany", members: 1, lat: 51.1657, lng: 10.4515 },
+  { name: "Hungary", members: 1, lat: 47.1625, lng: 19.5033 },
+  { name: "Italy", members: 1, lat: 41.8719, lng: 12.5674 },
+  { name: "Korea", members: 1, lat: 35.9078, lng: 127.7669 },
+  { name: "Singapore", members: 1, lat: 1.3521, lng: 103.8198 },
+  { name: "Spain", members: 1, lat: 40.4637, lng: -3.7492 },
+];
 ---
 <Layout title="Home" description="IGYM is the International Geoscience Youth Movement — student chapters, IGEO olympiad training, and youth advocacy for earth science, in 46 countries.">
   <section class="hero">
     <Contours opacity={0.09} />
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow"> I-GYM — International Geoscience Youth Movement</p>
+        <p class="eyebrow--nolinedash"> I-GYM — International Geoscience Youth Movement</p>
         <h1>We're the Youth<br /> Leaders of Earth Science Education</h1>
         <p class="hero-lede">
 I-GYM program was launched during IESO 2024, and since then, we have been committed to driving meaningful change in the growth of Earth Science Education System (ESE) through inquiry based learning. We are proud to welcome many more passionate young leaders who share our vision of transforming the future of geosciences.        </p>
@@ -42,20 +76,10 @@ I-GYM program was launched during IESO 2024, and since then, we have been commit
     <div class="container">
       <p class="eyebrow">Our Presence Around The World</p>
       <h2>Where Are We Situated</h2>
-      <!-- 1. The map container element requires an explicit height and width -->
-<div id="map"></div>
-
-<style>
-  #map {
-    height: 400px;
-    width: 100%;
-    border-radius: 8px;
-  }
-</style>
-
-<!-- 2. Client-side script ensures Leaflet only executes in the browser -->
-
-
+      <div
+        id="map"
+        data-markers={JSON.stringify(chapterMarkers)}
+      ></div>
     </div>
   </section>
 
@@ -63,41 +87,45 @@ I-GYM program was launched during IESO 2024, and since then, we have been commit
 
   <section class="log dark">
     <div class="container log-inner">
-       <div class="log-head">
-        <img src="" alt="">
-        <!-- <p class="eyebrow">Field log</p>
-        <h2>The core sample, dated.</h2>
+      <div class="log-head">
+        <div class="swiper log-swiper">
+          <div class="swiper-wrapper">
+            {logImages.map((img) => (
+              <div class="swiper-slide">
+                <img src={img.src} alt={img.alt} />
+              </div>
+            ))}
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+         <p class="eyebrow">Field log</p>
+        <!--<h2>The core sample, dated.</h2>
         <p>A running record of the movement, kept the way a geologist keeps a core log — depth, layer, note.</p> -->
       </div>
-      <!-- 1. The map container element requires an explicit height and width -->
 
-<style>
-  #map {
-    height: 0px;
-    width: 100%;
-    border-radius: 8px; z-index: 0;
-  }
-</style>
+      <script>
+        import Swiper from 'swiper';
+        import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-<!-- 2. Client-side script ensures Leaflet only executes in the browser -->
-<script>
-  import L from 'leaflet';
-  
-    // Initialize the map and set its coordinates and zoom level
-      const map = L.map('map').setView([12.740605,77.4997681], 13);
-      
-        // Add an open-source OpenStreetMap tile layer to the canvas
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              maxZoom: 19,
-                  attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
-                    }).addTo(map);
-                    
-                      // Add a marker coordinate position onto the map
-                        L.marker([12.740605,77.4997681])
-                            .addTo(map)
-                                .bindPopup('Hello! This is a Leaflet map in Astro.')
-                                    .openPopup();
-                                    </script>
+        new Swiper('.log-swiper', {
+          modules: [Navigation, Pagination, Autoplay],
+          loop: true,
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      </script>
 
       <dl class="log-list">
         {log.map((row) => (
@@ -117,13 +145,14 @@ I-GYM program was launched during IESO 2024, and since then, we have been commit
       <div>
         <p class="eyebrow">Youth leaders</p>
         <h2>Run by students, region by region.</h2>
-        <p>Meet the volunteers coordinating chapters across five continents.</p>
+        <p>Meet the enthusiatic Youth Leaders coordinating chapters from across the globe</p>
         <a href="/youth-leaders" class="btn btn-ghost">Meet the leaders</a>
       </div>
       <div>
         <p class="eyebrow">Upcoming</p>
         <h2>Next on the calendar.</h2>
-        <p>Regional camps, olympiad selection trials, and open mapping days near you.</p>
+        <p>Upcoming workshops, webinars & networking events
+for the next generation of Earth science leaders. </p>
         <a href="/events" class="btn btn-ghost">View the calendar</a>
       </div>
     </div>
@@ -139,6 +168,48 @@ I-GYM program was launched during IESO 2024, and since then, we have been commit
     </div>
   </section> -->
 </Layout>
+
+<script>
+  import { Map, Marker, Popup, NavigationControl } from "maplibre-gl";
+
+  const mapEl = document.getElementById("map");
+
+  if (mapEl instanceof HTMLElement) {
+    const raw = mapEl.getAttribute("data-markers") ?? "[]";
+    const decoded = raw
+      .replaceAll("&quot;", '"')
+      .replaceAll("&#34;", '"')
+      .replaceAll("&amp;", "&");
+
+    const chapters = JSON.parse(decoded) as Array<{
+      name: string;
+      members: number;
+      lat: number;
+      lng: number;
+    }>;
+
+    const map = new Map({
+      container: mapEl,
+      // OpenFreeMap's "liberty" style — real OSM data, vector tiles, no key required.
+      style: "https://tiles.openfreemap.org/styles/liberty",
+      center: [20, 15],
+      zoom: 1,
+      minZoom: 1,
+    });
+
+    map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+
+    chapters.forEach((chapter) => {
+      const popup = new Popup({ offset: 16 }).setHTML(
+        `<strong>${chapter.name}</strong><br>${chapter.members} ${chapter.members === 1 ? "member" : "members"}`
+      );
+      new Marker({ color: "#b5563a" })
+        .setLngLat([chapter.lng, chapter.lat])
+        .setPopup(popup)
+        .addTo(map);
+    });
+  }
+</script>
 
 <style>
   .hero {
@@ -179,12 +250,61 @@ I-GYM program was launched during IESO 2024, and since then, we have been commit
   }
   .pillar-card .tag { margin-bottom: 1rem; color: var(--rust); border-color: var(--rust); }
 
+  #map {
+    height: 420px;
+    width: 100%;
+    margin-top: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--stone);
+  }
+
   .log { padding-block: clamp(3rem, 7vw, 5rem); }
   .log-inner {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
     gap: 3rem;
   }
+
+  .log-head {
+    position: relative;
+  }
+  .log-swiper .swiper-wrapper {
+  flex-wrap: nowrap;
+}
+.log-swiper .swiper-slide {
+  width: 100% !important;
+  flex-shrink: 0;
+  height: 100%;
+}
+  .log-swiper {
+    width: 100%;
+    height: 360px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .log-swiper .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .log-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .log-swiper .swiper-button-prev,
+  .log-swiper .swiper-button-next {
+    color: var(--paper, #fff);
+  }
+  .log-swiper .swiper-pagination-bullet {
+    background: var(--paper, #fff);
+    opacity: 1;
+  }
+  .log-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+
   .log-list {
     margin: 0;
     display: flex;
