@@ -1,0 +1,209 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FaultLine from "../components/FaultLine.astro";
+
+const council = [
+  {
+    id: "IGYM-GC-01",
+    name: "Amara Diallo",
+    role: "Global Coordinator",
+    region: "West Africa",
+    chapter: "Dakar Earth Science Circle",
+    focus: "Hydrogeology",
+    bio: "Steers the annual assembly and chapter-standards review. IGEO 2019 team member for Senegal.",
+  },
+  {
+    id: "IGYM-GC-02",
+    name: "Yui Tanaka",
+    role: "Global Coordinator",
+    region: "East Asia",
+    chapter: "Mie Geoscience Society",
+    focus: "Seismology",
+    bio: "One of IGYM's founding members; still runs the earthquake-simulation workshop she wrote in 2017.",
+  },
+];
+
+const regional = [
+  {
+    id: "IGYM-EU-04",
+    name: "Elif Kaya",
+    role: "Regional Coordinator",
+    region: "Southeastern Europe",
+    chapter: "Istanbul Youth Geoscience",
+    focus: "Structural geology",
+    bio: "Coordinates 9 chapters across Turkey, Greece, and the Balkans and runs the region's olympiad trials.",
+  },
+  {
+    id: "IGYM-SA-02",
+    name: "Mateus Rocha",
+    role: "Regional Coordinator",
+    region: "South America",
+    chapter: "Núcleo Jovem de Geociências, São Paulo",
+    focus: "Volcanology",
+    bio: "Leads field trips to the Andes for chapters in Brazil, Chile, and Peru; olympiad mentor since 2022.",
+  },
+  {
+    id: "IGYM-NA-01",
+    name: "Priya Anand",
+    role: "Regional Coordinator",
+    region: "North America",
+    chapter: "Toronto Earth Science Youth Network",
+    focus: "Glaciology",
+    bio: "Built the toolkit chapters use to run remote-sensing labs with free satellite imagery.",
+  },
+  {
+    id: "IGYM-AF-03",
+    name: "Kwame Boateng",
+    role: "Regional Coordinator",
+    region: "Sub-Saharan Africa",
+    chapter: "Accra Geosciences Youth Hub",
+    focus: "Mineral resources",
+    bio: "Opened four new chapters across Ghana and Côte d'Ivoire in the last two years.",
+  },
+  {
+    id: "IGYM-OC-01",
+    name: "Isla Fraser",
+    role: "Regional Coordinator",
+    region: "Oceania",
+    chapter: "Wellington Rock Club",
+    focus: "Geohazards",
+    bio: "Runs the region's tsunami-preparedness workshops in partnership with local schools.",
+  },
+  {
+    id: "IGYM-AS-06",
+    name: "Nabila Rahman",
+    role: "Regional Coordinator",
+    region: "South & Southeast Asia",
+    chapter: "Dhaka Youth Earth Science Forum",
+    focus: "Sedimentology",
+    bio: "Coordinates 12 chapters across Bangladesh, India, and Indonesia — IGYM's largest region.",
+  },
+  {
+    id: "IGYM-EU-07",
+    name: "Marta Nowak",
+    role: "Regional Coordinator",
+    region: "Central Europe",
+    chapter: "Kraków Young Geologists",
+    focus: "Paleontology",
+    bio: "Started IGYM's first fossil-prep outreach programme for younger schoolchildren.",
+  },
+];
+---
+<Layout title="Youth Leaders" description="Meet the student volunteers who coordinate IGYM chapters and olympiad training across six regions.">
+  <section class="intro">
+    <div class="container">
+      <p class="eyebrow">Youth Leaders</p>
+      <h1>Run by students, region by region.</h1>
+      <p class="lede">
+        Every layer of IGYM, from the global council to a single chapter meeting, is led by someone
+        still in school or university. Here's who's coordinating the movement right now.
+      </p>
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--paper)" />
+
+  <section class="council" style="background: var(--paper);">
+    <div class="container">
+      <p class="eyebrow">Global council</p>
+      <div class="leader-grid">
+        {council.map((l) => (
+          <article class="card leader-card">
+            <div class="leader-head">
+              <span class="tag">{l.id}</span>
+              <span class="tag tag-focus">{l.focus}</span>
+            </div>
+            <h3>{l.name}</h3>
+            <p class="leader-role">{l.role} — {l.region}</p>
+            <p class="leader-chapter">{l.chapter}</p>
+            <p>{l.bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FaultLine from="var(--paper)" to="var(--stone)" />
+
+  <section class="regional">
+    <div class="container">
+      <p class="eyebrow">Regional coordinators</p>
+      <div class="leader-grid leader-grid-wide">
+        {regional.map((l) => (
+          <article class="card leader-card">
+            <div class="leader-head">
+              <span class="tag">{l.id}</span>
+              <span class="tag tag-focus">{l.focus}</span>
+            </div>
+            <h3>{l.name}</h3>
+            <p class="leader-role">{l.role} — {l.region}</p>
+            <p class="leader-chapter">{l.chapter}</p>
+            <p>{l.bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta dark">
+    <div class="container cta-inner">
+      <div>
+        <p class="eyebrow">Want to be on this page?</p>
+        <h2>Chapters are always looking for their next coordinator.</h2>
+      </div>
+      <a href="/get-involved" class="btn btn-primary">See open roles</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro { padding-block: clamp(3rem, 7vw, 5rem); }
+  .intro .lede { font-size: var(--step-1); max-width: 58ch; }
+
+  .council, .regional { padding-block: clamp(3rem, 7vw, 5rem); }
+
+  .leader-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .leader-grid-wide { grid-template-columns: repeat(3, 1fr); }
+
+  .leader-card { display: flex; flex-direction: column; }
+  .leader-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .tag-focus { color: var(--verdigris); border-color: var(--verdigris); }
+  .leader-card h3 { font-size: var(--step-1); margin-bottom: 0.15rem; }
+  .leader-role {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--rust);
+    margin-bottom: 0.4rem;
+  }
+  .leader-chapter {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+  }
+
+  .cta { padding-block: clamp(2.5rem, 6vw, 4rem); }
+  .cta-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cta-inner h2 { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    .leader-grid, .leader-grid-wide { grid-template-columns: 1fr; }
+  }
+</style>

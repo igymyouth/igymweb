@@ -1,0 +1,234 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CoreSample from "../components/CoreSample.astro";
+import Contours from "../components/Contours.astro";
+import FaultLine from "../components/FaultLine.astro";
+import 'leaflet/dist/leaflet.css';
+
+
+
+
+const log = [
+  { k: "Founded", v: "2023" },
+  { k: "Launched", v: "August 2024" },
+  { k: "Members", v: "60+ from 19 different countries worldwide" },
+  { k: "Chapters", v: "19" },
+];
+
+---
+<Layout title="Home" description="IGYM is the International Geoscience Youth Movement — student chapters, IGEO olympiad training, and youth advocacy for earth science, in 46 countries.">
+  <section class="hero">
+    <Contours opacity={0.09} />
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow"> I-GYM — International Geoscience Youth Movement</p>
+        <h1>We're the Youth<br /> Leaders of Earth Science Education</h1>
+        <p class="hero-lede">
+I-GYM program was launched during IESO 2024, and since then, we have been committed to driving meaningful change in the growth of Earth Science Education System (ESE) through inquiry based learning. We are proud to welcome many more passionate young leaders who share our vision of transforming the future of geosciences.        </p>
+        <div class="hero-actions">
+          <!-- <a href="/get-involved" class="btn btn-primary">Start a chapter</a> -->
+          <a href="/events" class="btn btn-ghost">See upcoming events</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <CoreSample />
+      </div>
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--paper)" />
+
+  <section class="pillars" style="background: var(--paper);">
+    <div class="container">
+      <p class="eyebrow">Our Presence Around The World</p>
+      <h2>Where Are We Situated</h2>
+      <!-- 1. The map container element requires an explicit height and width -->
+<div id="map"></div>
+
+<style>
+  #map {
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+  }
+</style>
+
+<!-- 2. Client-side script ensures Leaflet only executes in the browser -->
+
+
+    </div>
+  </section>
+
+  <FaultLine from="var(--paper)" to="var(--slate)" />
+
+  <section class="log dark">
+    <div class="container log-inner">
+       <div class="log-head">
+        <img src="" alt="">
+        <!-- <p class="eyebrow">Field log</p>
+        <h2>The core sample, dated.</h2>
+        <p>A running record of the movement, kept the way a geologist keeps a core log — depth, layer, note.</p> -->
+      </div>
+      <!-- 1. The map container element requires an explicit height and width -->
+
+<style>
+  #map {
+    height: 0px;
+    width: 100%;
+    border-radius: 8px; z-index: 0;
+  }
+</style>
+
+<!-- 2. Client-side script ensures Leaflet only executes in the browser -->
+<script>
+  import L from 'leaflet';
+  
+    // Initialize the map and set its coordinates and zoom level
+      const map = L.map('map').setView([12.740605,77.4997681], 13);
+      
+        // Add an open-source OpenStreetMap tile layer to the canvas
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+                  attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+                    }).addTo(map);
+                    
+                      // Add a marker coordinate position onto the map
+                        L.marker([12.740605,77.4997681])
+                            .addTo(map)
+                                .bindPopup('Hello! This is a Leaflet map in Astro.')
+                                    .openPopup();
+                                    </script>
+
+      <dl class="log-list">
+        {log.map((row) => (
+          <div class="log-row">
+            <dt>{row.k}</dt>
+            <dd>{row.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <FaultLine from="var(--slate)" to="var(--stone)" flip />
+
+  <section class="preview">
+    <div class="container preview-inner">
+      <div>
+        <p class="eyebrow">Youth leaders</p>
+        <h2>Run by students, region by region.</h2>
+        <p>Meet the volunteers coordinating chapters across five continents.</p>
+        <a href="/youth-leaders" class="btn btn-ghost">Meet the leaders</a>
+      </div>
+      <div>
+        <p class="eyebrow">Upcoming</p>
+        <h2>Next on the calendar.</h2>
+        <p>Regional camps, olympiad selection trials, and open mapping days near you.</p>
+        <a href="/events" class="btn btn-ghost">View the calendar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="cta dark">
+    <div class="container cta-inner">
+      <div>
+        <p class="eyebrow">No chapter near you yet?</p>
+        <h2>Start one. We'll send the starter kit.</h2>
+      </div>
+      <a href="/get-involved" class="btn btn-primary">Get involved</a>
+    </div>
+  </section> -->
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(3rem, 8vw, 6rem);
+    overflow: hidden;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-lede {
+    font-size: var(--step-1);
+    max-width: 46ch;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+  }
+
+  .pillars { padding-block: clamp(3rem, 7vw, 5rem); }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .pillar-card .tag { margin-bottom: 1rem; color: var(--rust); border-color: var(--rust); }
+
+  .log { padding-block: clamp(3rem, 7vw, 5rem); }
+  .log-inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3rem;
+  }
+  .log-list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .log-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .log-row dt {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ochre);
+  }
+  .log-row dd { margin: 0; color: var(--stone); }
+
+  .preview { padding-block: clamp(3rem, 7vw, 5rem); }
+  .preview-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .cta { padding-block: clamp(2.5rem, 6vw, 4rem); }
+  .cta-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cta-inner h2 { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .log-inner { grid-template-columns: 1fr; }
+    .preview-inner { grid-template-columns: 1fr; }
+  }
+</style>

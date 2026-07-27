@@ -1,0 +1,28 @@
+---
+interface Props {
+  stroke?: string;
+  opacity?: number;
+}
+const { stroke = "var(--ink)", opacity = 0.08 } = Astro.props;
+---
+<svg class="contours" aria-hidden="true" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke={stroke} stroke-width="1" opacity={opacity}>
+    <path d="M-20,420 Q120,470 250,430 T520,440 T800,410" />
+    <path d="M-20,380 Q140,430 280,385 T540,395 T800,360" />
+    <path d="M-20,335 Q160,385 300,335 T560,345 T800,305" />
+    <path d="M-20,285 Q180,330 320,280 T580,290 T800,250" />
+    <path d="M-20,230 Q200,270 340,220 T600,225 T800,195" />
+    <path d="M-20,175 Q220,205 360,160 T620,160 T800,140" />
+    <path d="M-20,120 Q240,140 380,105 T640,100 T800,90" />
+  </g>
+</svg>
+
+<style>
+  .contours {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+</style>

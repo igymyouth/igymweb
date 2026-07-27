@@ -1,0 +1,187 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FaultLine from "../components/FaultLine.astro";
+
+const timeline = [
+  { year: "2016", title: "Founded in Mie, Japan", copy: "A group of IGEO olympiad alumni, tired of losing touch after the closing ceremony, agreed to keep the network running year-round." },
+  { year: "2018", title: "First regional chapters", copy: "Chapters open in Indonesia, Poland, Argentina, and South Africa — each run entirely by students under 25." },
+  { year: "2021", title: "Remote fieldwork toolkit", copy: "IGYM publishes an open toolkit for running mapping and seismology labs with a phone, a compass, and free satellite data." },
+  { year: "2023", title: "Youth delegation programme", copy: "IGYM sends its first youth delegates to observe geohazard policy briefings, pairing students with mentors from partner institutions." },
+  { year: "2026", title: "142 chapters, 46 countries", copy: "The movement crosses 6,800 members, with alumni now teaching, researching, and coordinating disaster response worldwide." },
+];
+
+const structure = [
+  { layer: "Global council", fill: "#263C49", copy: "Eight elected youth leaders, one per world region, setting shared standards and holding the annual assembly." },
+  { layer: "Regional coordinators", fill: "#4E7C6C", copy: "Volunteers supporting 4–12 chapters each, translating global resources and running olympiad selection trials." },
+  { layer: "Local chapters", fill: "#B24F2C", copy: "Student-run groups at schools and universities — the layer where fieldwork, workshops, and outreach actually happen." },
+];
+
+const values = [
+  { title: "Field over lecture", copy: "If it can be measured outdoors, we go outdoors. Labs are built around real outcrops, rivers, and instruments wherever possible." },
+  { title: "Led by students, for students", copy: "Every coordinator role is held by someone aged 25 or under. Adult mentors advise; they don't run chapters." },
+  { title: "Open by default", copy: "Curricula, toolkits, and selection materials are published openly so any school, anywhere, can start a chapter." },
+  { title: "Science that travels", copy: "We work across languages and curricula, translating core material into the languages our chapters actually teach in." },
+];
+---
+<Layout title="About us" description="IGYM's mission, history, and structure — a student-led movement built by IGEO olympiad alumni since 2016.">
+  <section class="intro">
+    <div class="container intro-inner">
+      <p class="eyebrow">About IGYM</p>
+      <h1>A youth movement, laid down in layers.</h1>
+      <p class="lede">
+        IGYM exists so that the curiosity sparked by a good geoscience teacher — or a good olympiad —
+        doesn't stop the moment the exam ends. We're a student-run network that keeps young geoscientists
+        mapping, measuring, and organising together, year after year.
+      </p>
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--paper)" />
+
+  <section class="mission" style="background: var(--paper);">
+    <div class="container mission-inner">
+      <div>
+        <p class="eyebrow">Mission</p>
+        <h2>Keep the network running after the closing ceremony.</h2>
+        <p>Most geoscience olympiads and school programmes end the moment the medals are handed out. IGYM is the part that continues: chapters that meet monthly, mentors who stay in touch, and a straight line from a first rock-identification badge to a research placement or an olympiad team.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Partnership with IGEO</p>
+        <h2>Built by olympiad alumni, open to everyone.</h2>
+        <p>IGYM was founded by former International Geoscience Olympiad (IGEO) competitors and remains close to that community — many regional coordinators are IGEO alumni or current national-team mentors. Membership, though, is open to any student with curiosity about the earth, whether or not they've ever sat an olympiad paper.</p>
+      </div>
+    </div>
+  </section>
+
+  <FaultLine from="var(--paper)" to="var(--stone)" />
+
+  <section class="structure">
+    <div class="container">
+      <p class="eyebrow">How we're organised</p>
+      <h2>Three layers, like the ground beneath us.</h2>
+      <div class="structure-grid">
+        {structure.map((s) => (
+          <div class="structure-row">
+            <span class="structure-swatch" style={{ background: s.fill }}></span>
+            <div>
+              <h3>{s.layer}</h3>
+              <p>{s.copy}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--slate)" />
+
+  <section class="timeline dark">
+    <div class="container">
+      <p class="eyebrow">Ten years, dated like a core log</p>
+      <h2>How the movement formed.</h2>
+      <ol class="timeline-list">
+        {timeline.map((t) => (
+          <li class="timeline-row">
+            <span class="timeline-year">{t.year}</span>
+            <div>
+              <h3>{t.title}</h3>
+              <p>{t.copy}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <FaultLine from="var(--slate)" to="var(--paper)" flip />
+
+  <section class="values" style="background: var(--paper);">
+    <div class="container">
+      <p class="eyebrow">What we hold to</p>
+      <h2>Our values, in practice.</h2>
+      <div class="values-grid">
+        {values.map((v) => (
+          <div class="card">
+            <h3>{v.title}</h3>
+            <p>{v.copy}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro { padding-block: clamp(3rem, 7vw, 5rem); }
+  .intro-inner .lede { font-size: var(--step-1); max-width: 60ch; }
+
+  .mission { padding-block: clamp(3rem, 7vw, 5rem); }
+  .mission-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .structure { padding-block: clamp(3rem, 7vw, 5rem); }
+  .structure-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .structure-row {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .structure-swatch {
+    width: 14px;
+    height: 100%;
+    min-height: 3rem;
+    border-radius: 2px;
+    margin-top: 0.3rem;
+  }
+  .structure-row h3 { margin-bottom: 0.35rem; font-size: var(--step-1); }
+  .structure-row p { margin: 0; max-width: 60ch; }
+
+  .timeline { padding-block: clamp(3rem, 7vw, 5rem); }
+  .timeline-list {
+    list-style: none;
+    margin: 2.5rem 0 0;
+    padding: 0;
+  }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--line-dark);
+  }
+  .timeline-row:last-child { border-bottom: 1px solid var(--line-dark); }
+  .timeline-year {
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+    color: var(--ochre);
+  }
+  .timeline-row h3 { font-size: var(--step-1); margin-bottom: 0.35rem; }
+  .timeline-row p { margin: 0; max-width: 58ch; }
+
+  .values { padding-block: clamp(3rem, 7vw, 5rem); }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .mission-inner { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
+    .timeline-row { grid-template-columns: 70px 1fr; }
+  }
+</style>

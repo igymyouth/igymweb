@@ -1,0 +1,202 @@
+/* =========================================================
+   IGYM — Design Tokens
+   A palette pulled from a sediment core: sandstone base,
+   iron-oxide rust, copper-patina green, deep slate depths.
+   ========================================================= */
+
+:root {
+  /* Core palette — named for the minerals/strata they evoke */
+  --stone:      #EAE1C8; /* base sandstone — page background */
+  --paper:      #F7F2E4; /* limestone — card & panel surfaces */
+  --ink:        #211E19; /* wet basalt — primary text */
+  --ink-soft:   #4A453C; /* weathered basalt — secondary text */
+  --slate:      #263C49; /* deep slate — dark sections */
+  --slate-2:    #1B2C36; /* darker slate — footer */
+  --rust:       #B24F2C; /* iron oxide — primary accent / CTA */
+  --rust-dark:  #8F3D20; /* oxidized rust — hover state */
+  --verdigris:  #4E7C6C; /* copper patina — secondary accent */
+  --ochre:      #C6982E; /* mineral ochre — tags / highlights */
+  --line:       rgba(33, 30, 25, 0.14);
+  --line-dark:  rgba(234, 225, 200, 0.16);
+
+  /* Type scale */
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0:  clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --step-1:  clamp(1.25rem, 1.18rem + 0.35vw, 1.45rem);
+  --step-2:  clamp(1.6rem, 1.45rem + 0.75vw, 2.05rem);
+  --step-3:  clamp(2.1rem, 1.8rem + 1.5vw, 3.05rem);
+  --step-4:  clamp(2.75rem, 2.2rem + 2.75vw, 4.5rem);
+
+  --container: 1180px;
+  --radius: 4px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--stone);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+h1 { font-size: var(--step-4); font-optical-sizing: auto; }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); }
+h4 { font-size: var(--step-1); font-weight: 600; }
+
+p { margin: 0 0 1em; color: var(--ink-soft); max-width: 62ch; }
+
+a { color: inherit; }
+
+img, svg { max-width: 100%; display: block; }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+section { position: relative; }
+
+/* Eyebrow: small mono label used as a "field tag" throughout the site */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rust);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 1em;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--rust);
+  display: inline-block;
+}
+
+.dark .eyebrow { color: var(--ochre); }
+.dark .eyebrow::before { background: var(--ochre); }
+
+/* Buttons */
+.btn {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  padding: 0.95em 1.5em;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: var(--rust);
+  color: var(--paper);
+}
+.btn-primary:hover { background: var(--rust-dark); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: currentColor;
+  color: var(--ink);
+}
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+.dark .btn-ghost { color: var(--stone); }
+.dark .btn-ghost:hover { background: var(--stone); color: var(--slate); }
+
+/* Cards */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+}
+
+/* Dark section helper */
+.dark {
+  background: var(--slate);
+  color: var(--stone);
+}
+.dark h1, .dark h2, .dark h3, .dark h4 { color: var(--stone); }
+.dark p { color: rgba(234, 225, 200, 0.75); }
+
+/* Tag chip — used for specimen-label styling on leader/event cards */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25em 0.6em;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  display: inline-block;
+}
+
+/* Visually hidden (a11y) */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  background: var(--rust);
+  color: var(--paper);
+  padding: 0.75em 1.25em;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}

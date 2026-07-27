@@ -1,0 +1,204 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FaultLine from "../components/FaultLine.astro";
+
+const upcoming = [
+  {
+    date: "12–14 Sep 2026",
+    title: "Southeast Asia Mapping Camp",
+    type: "Fieldwork",
+    location: "Yogyakarta, Indonesia",
+    copy: "Three days of volcanic-terrain mapping and hazard surveying with chapters from Indonesia, Malaysia, and the Philippines.",
+  },
+  {
+    date: "3 Oct 2026",
+    title: "European Olympiad Selection Trial",
+    type: "Olympiad",
+    location: "Kraków, Poland (+ online)",
+    copy: "Written and practical rounds for students hoping to join national IGEO teams from Central and Eastern Europe.",
+  },
+  {
+    date: "21 Nov 2026",
+    title: "Global Open Chapter Day",
+    type: "Workshop",
+    location: "All chapters, worldwide",
+    copy: "Every chapter runs the same rock-identification and mini-seismology lab on the same day, then shares results on the map wall.",
+  },
+  {
+    date: "15–18 Jan 2027",
+    title: "IGYM Annual Assembly",
+    type: "Assembly",
+    location: "Accra, Ghana",
+    copy: "Coordinators from all six regions meet to set the year's shared curriculum and elect two new global council seats.",
+  },
+  {
+    date: "9 Feb 2027",
+    title: "South America Fault-Line Fieldwork Day",
+    type: "Fieldwork",
+    location: "Santiago, Chile",
+    copy: "A joint outing with university geology departments to log surface rupture evidence along the region's active faults.",
+  },
+];
+
+const past = [
+  { date: "Aug 2025", title: "North America Glaciology Camp", location: "Banff, Canada" },
+  { date: "May 2025", title: "IGEO 2025 send-off & scrimmage", location: "Online, all regions" },
+  { date: "Feb 2025", title: "West Africa Hydrogeology Workshop", location: "Dakar, Senegal" },
+  { date: "Nov 2024", title: "IGYM Annual Assembly", location: "Wellington, New Zealand" },
+];
+
+const typeColor: Record<string, string> = {
+  Fieldwork: "var(--rust)",
+  Olympiad: "var(--verdigris)",
+  Workshop: "var(--ochre)",
+  Assembly: "var(--slate)",
+};
+---
+<Layout title="Events" description="IGYM's calendar of mapping camps, olympiad selection trials, workshops, and the annual assembly.">
+  <section class="intro">
+    <div class="container">
+      <p class="eyebrow">Events</p>
+      <h1>Next on the calendar.</h1>
+      <p class="lede">
+        Regional camps, olympiad trials, workshops, and the annual assembly — logged here as they're
+        confirmed. Most events welcome visitors from other chapters; check each listing for details.
+      </p>
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--paper)" />
+
+  <section class="upcoming" style="background: var(--paper);">
+    <div class="container">
+      <p class="eyebrow">Upcoming</p>
+      <ul class="event-list">
+        {upcoming.map((e) => (
+          <li class="event-row">
+            <div class="event-date">{e.date}</div>
+            <div class="event-body">
+              <div class="event-head">
+                <h3>{e.title}</h3>
+                <span class="tag" style={{ color: typeColor[e.type], borderColor: typeColor[e.type] }}>{e.type}</span>
+              </div>
+              <p class="event-location">{e.location}</p>
+              <p>{e.copy}</p>
+            </div>
+            <a href="/get-involved" class="btn btn-ghost event-cta">Register interest</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <FaultLine from="var(--paper)" to="var(--slate)" />
+
+  <section class="past dark">
+    <div class="container">
+      <p class="eyebrow">Past highlights</p>
+      <h2>Where we've been.</h2>
+      <ul class="past-list">
+        {past.map((e) => (
+          <li>
+            <span class="past-date">{e.date}</span>
+            <span class="past-title">{e.title}</span>
+            <span class="past-location">{e.location}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <FaultLine from="var(--slate)" to="var(--stone)" flip />
+
+  <section class="cta">
+    <div class="container cta-inner">
+      <div>
+        <p class="eyebrow">Hosting something?</p>
+        <h2>Tell us about your chapter's event.</h2>
+        <p>If your chapter is running a workshop, camp, or trial, let the global council know and we'll list it here for other chapters to join.</p>
+      </div>
+      <a href="/get-involved" class="btn btn-primary">Submit an event</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro { padding-block: clamp(3rem, 7vw, 5rem); }
+  .intro .lede { font-size: var(--step-1); max-width: 58ch; }
+
+  .upcoming { padding-block: clamp(3rem, 7vw, 5rem); }
+  .event-list {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .event-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 1.75rem;
+    align-items: start;
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+  .event-row:last-child { border-bottom: 1px solid var(--line); }
+  .event-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--rust);
+    padding-top: 0.3rem;
+  }
+  .event-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .event-head h3 { margin: 0; font-size: var(--step-1); }
+  .event-location {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin: 0.35rem 0 0.6rem;
+  }
+  .event-cta { align-self: center; white-space: nowrap; }
+
+  .past { padding-block: clamp(3rem, 7vw, 5rem); }
+  .past-list {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .past-list li {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 1.5rem;
+    padding-block: 1rem;
+    border-top: 1px solid var(--line-dark);
+    font-size: 0.92rem;
+  }
+  .past-list li:last-child { border-bottom: 1px solid var(--line-dark); }
+  .past-date { font-family: var(--font-mono); color: var(--ochre); }
+  .past-location { color: rgba(234, 225, 200, 0.6); font-family: var(--font-mono); font-size: 0.82rem; }
+
+  .cta { padding-block: clamp(3rem, 7vw, 5rem); }
+  .cta-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cta-inner > div:first-child { max-width: 50ch; }
+  .cta-inner h2 { margin-bottom: 0.5rem; }
+
+  @media (max-width: 780px) {
+    .event-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .event-cta { justify-self: start; }
+    .past-list li { grid-template-columns: 80px 1fr; }
+    .past-location { display: none; }
+  }
+</style>

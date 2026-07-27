@@ -1,0 +1,216 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FaultLine from "../components/FaultLine.astro";
+
+const paths = [
+  {
+    id: "01",
+    title: "Join a chapter",
+    who: "Students aged 14–25",
+    copy: "Find an active chapter near you and start turning up to workshops, mapping days, and olympiad prep sessions.",
+    cta: { label: "Find a chapter", href: "#chapter-map" },
+  },
+  {
+    id: "02",
+    title: "Start a chapter",
+    who: "Students at a school or university without one",
+    copy: "We'll send a starter kit — curriculum, olympiad prep material, and a mentor from the nearest regional coordinator.",
+    cta: { label: "Request a starter kit", href: "#signup" },
+  },
+  {
+    id: "03",
+    title: "Volunteer as a coordinator",
+    who: "Alumni, mentors, and teachers",
+    copy: "Regional coordinators need help running selection trials, translating materials, and mentoring new chapter leads.",
+    cta: { label: "See open roles", href: "#signup" },
+  },
+  {
+    id: "04",
+    title: "Partner or support",
+    who: "Institutions, olympiad committees, and donors",
+    copy: "Sponsor a field trip, host a training, or help cover instruments and travel for chapters that need it most.",
+    cta: { label: "Talk to us", href: "mailto:partners@igym.org" },
+  },
+];
+---
+<Layout title="Get Involved" description="Join or start an IGYM chapter, volunteer as a regional coordinator, or partner with the movement.">
+  <section class="intro">
+    <div class="container">
+      <p class="eyebrow">Get Involved</p>
+      <h1>Pick your layer.</h1>
+      <p class="lede">
+        Every part of IGYM runs on volunteers who were once exactly where you are now. Here's where
+        most people start.
+      </p>
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--paper)" />
+
+  <section class="paths" style="background: var(--paper);">
+    <div class="container">
+      <div class="path-grid">
+        {paths.map((p) => (
+          <div class="card path-card">
+            <span class="path-id">{p.id}</span>
+            <h3>{p.title}</h3>
+            <p class="path-who">{p.who}</p>
+            <p>{p.copy}</p>
+            <a href={p.cta.href} class="btn btn-ghost">{p.cta.label}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FaultLine from="var(--paper)" to="var(--stone)" />
+
+  <section class="signup" id="signup">
+    <div class="container signup-inner">
+      <div class="signup-copy">
+        <p class="eyebrow">Tell us where to send the kit</p>
+        <h2>Get the starter kit, mentor match, or volunteer form.</h2>
+        <p>
+          Fill this in and the right regional coordinator will follow up — usually within a week.
+          No chapter yet? That's the point of this form.
+        </p>
+      </div>
+
+      <form class="card signup-form" action="mailto:hello@igym.org" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+        <div class="field">
+          <label for="location">City / country</label>
+          <input id="location" name="location" type="text" required />
+        </div>
+        <div class="field">
+          <label for="interest">I'm interested in</label>
+          <select id="interest" name="interest">
+            <option>Joining an existing chapter</option>
+            <option>Starting a new chapter</option>
+            <option>Volunteering as a coordinator</option>
+            <option>Partnering or supporting IGYM</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">A little about you</label>
+          <textarea id="message" name="message" rows="4" placeholder="Your school or university, your olympiad background if any, and what you're hoping to do."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+        <p class="form-note">This opens your email client with the details pre-filled. Prefer to connect a form service like Formspree instead — swap the <code>action</code> attribute above.</p>
+      </form>
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--slate)" />
+
+  <section class="map dark" id="chapter-map">
+    <div class="container map-inner">
+      <p class="eyebrow">Chapter map</p>
+      <h2>142 chapters, six regions.</h2>
+      <p>
+        The full interactive chapter map is being rebuilt alongside this site. In the meantime,
+        email <a href="mailto:hello@igym.org">hello@igym.org</a> with your city and we'll point you
+        to the nearest active chapter directly.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro { padding-block: clamp(3rem, 7vw, 5rem); }
+  .intro .lede { font-size: var(--step-1); max-width: 56ch; }
+
+  .paths { padding-block: clamp(3rem, 7vw, 5rem); }
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .path-card { position: relative; }
+  .path-id {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ochre);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .path-who {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--rust);
+    margin-bottom: 0.75rem;
+  }
+  .path-card .btn { margin-top: 0.5rem; }
+
+  .signup { padding-block: clamp(3rem, 7vw, 5rem); }
+  .signup-inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .field label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.7em 0.85em;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--stone);
+    color: var(--ink);
+  }
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: 2px solid var(--rust);
+    outline-offset: 1px;
+  }
+  .signup-form .btn { align-self: flex-start; }
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .form-note code {
+    font-family: var(--font-mono);
+    background: var(--stone);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+
+  .map { padding-block: clamp(3rem, 7vw, 5rem); }
+  .map-inner p { max-width: 60ch; }
+  .map-inner a { color: var(--ochre); }
+
+  @media (max-width: 900px) {
+    .path-grid { grid-template-columns: 1fr; }
+    .signup-inner { grid-template-columns: 1fr; }
+  }
+</style>

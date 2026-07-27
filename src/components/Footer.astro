@@ -1,0 +1,99 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="site-footer dark">
+  <div class="container footer-inner">
+    <div class="footer-col brand-col">
+      <p class="footer-brand">IGYM</p>
+      <p class="footer-desc">International Geoscience Youth Movement — a global network of student chapters mapping, measuring, and speaking up for the planet, in partnership with the IGEO olympiad community.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Explore</p>
+      <ul>
+        <li><a href="/about">About us</a></li>
+        <li><a href="/youth-leaders">Youth Leaders</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/get-involved">Get Involved</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Connect</p>
+      <ul>
+        <li><a href="mailto:igymyouth@gmail.com">igymyouth@gmail.com</a></li>
+        <li><a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
+        <li><a href="https://x.com" target="_blank" rel="noreferrer">X / Twitter</a></li>
+        <li><a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-heading">Field notes</p>
+      <p class="footer-coords">14.5995° N, 120.9842° E<br />and everywhere in between</p>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>&copy; {year} International Geoscience Youth Movement. Built by young earth scientists, for young earth scientists.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--slate-2);
+    padding-top: 3.5rem;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+  }
+  .footer-desc { max-width: 34ch; font-size: 0.92rem; }
+  .footer-heading {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--ochre);
+    margin: 0 0 1rem;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .footer-col a {
+    text-decoration: none;
+    color: rgba(234, 225, 200, 0.78);
+    font-size: 0.92rem;
+  }
+  .footer-col a:hover { color: var(--stone); }
+  .footer-coords {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+  .footer-bottom {
+    padding-block: 1.25rem;
+  }
+  .footer-bottom p {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(234, 225, 200, 0.55);
+    margin: 0;
+  }
+  @media (max-width: 780px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+</style>
