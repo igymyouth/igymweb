@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "astro": "^4.16.0",
+    "firebase": "^12.16.0",
     "maplibre-gl": "^6.0.0",
     "swiper": "^14.0.6"
   }

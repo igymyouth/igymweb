@@ -76,7 +76,7 @@ const paths = [
         </p>
       </div>
 
-      <form class="card signup-form" action="mailto:hello@igym.org" method="post" enctype="text/plain">
+      <form class="card signup-form" id="signup-form" novalidate>
         <div class="field">
           <label for="name">Full name</label>
           <input id="name" name="name" type="text" required />
@@ -91,7 +91,8 @@ const paths = [
         </div>
         <div class="field">
           <label for="interest">I'm interested in</label>
-          <select id="interest" name="interest">
+          <select id="interest" name="interest" required>
+            <option value="">Select one</option>
             <option>Joining an existing chapter</option>
             <option>Starting a new chapter</option>
             <option>Volunteering as a coordinator</option>
@@ -103,24 +104,103 @@ const paths = [
           <textarea id="message" name="message" rows="4" placeholder="Your school or university, your olympiad background if any, and what you're hoping to do."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Send</button>
-        <p class="form-note">This opens your email client with the details pre-filled. Prefer to connect a form service like Formspree instead — swap the <code>action</code> attribute above.</p>
+        <p class="form-status" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </section>
 
-  <FaultLine from="var(--stone)" to="var(--slate)" />
 
-  <section class="map dark" id="chapter-map">
-    <div class="container map-inner">
-      <p class="eyebrow">Chapter map</p>
-      <h2>142 chapters, six regions.</h2>
-      <p>
-        The full interactive chapter map is being rebuilt alongside this site. In the meantime,
-        email <a href="mailto:hello@igym.org">hello@igym.org</a> with your city and we'll point you
-        to the nearest active chapter directly.
-      </p>
-    </div>
-  </section>
+
+ 
+
+  <script>
+    const form = document.getElementById("signup-form");
+    const statusEl = form.querySelector(".form-status");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    // Attached first and unconditionally — guarantees the page can
+    // never reload or change URL on submit, even if Firebase fails to load.
+    form.addEventListener("submit", handleSubmit);
+
+    function showStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = `form-status ${type}`;
+      statusEl.hidden = false;
+    }
+
+    function clearFieldErrors() {
+      form.querySelectorAll(".field").forEach((f) => f.classList.remove("field-error"));
+    }
+
+    function validate(data) {
+      const errors = [];
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!data.name || data.name.trim().length < 2) {
+        errors.push({ field: "name", message: "Please enter your full name." });
+      }
+      if (!data.email || !emailRegex.test(data.email.trim())) {
+        errors.push({ field: "email", message: "Please enter a valid email address." });
+      }
+      if (!data.location || data.location.trim().length < 2) {
+        errors.push({ field: "location", message: "Please enter your city or country." });
+      }
+      if (!data.interest) {
+        errors.push({ field: "interest", message: "Please select what you're interested in." });
+      }
+      if (data.message && data.message.length > 1000) {
+        errors.push({ field: "message", message: "Please keep your message under 1000 characters." });
+      }
+      return errors;
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      statusEl.hidden = true;
+      clearFieldErrors();
+
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        location: form.location.value.trim(),
+        interest: form.interest.value,
+        message: form.message.value.trim(),
+      };
+
+      const errors = validate(data);
+      if (errors.length) {
+        errors.forEach((err) => {
+          const fieldEl = form.querySelector(`#${err.field}`)?.closest(".field");
+          if (fieldEl) fieldEl.classList.add("field-error");
+        });
+        showStatus(errors.map((e) => e.message).join(" "), "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      const originalLabel = submitBtn.textContent;
+      submitBtn.textContent = "Sending...";
+
+      try {
+        const { db } = await import("../lib/firebase.js");
+        const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+
+        await addDoc(collection(db, "Applications"), {
+          ...data,
+          timestamp: serverTimestamp(),
+        });
+
+        showStatus("Thanks! We've received your details — a coordinator will follow up soon.", "success");
+        form.reset();
+      } catch (err) {
+        console.error("Firestore write failed:", err);
+        showStatus("Something went wrong sending your details. Please try again, or email hello@igym.org directly.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
+    }
+  </script>
 </Layout>
 
 <style>
@@ -192,17 +272,28 @@ const paths = [
     outline: 2px solid var(--rust);
     outline-offset: 1px;
   }
+  .field-error input,
+  .field-error select,
+  .field-error textarea {
+    border-color: var(--rust);
+  }
   .signup-form .btn { align-self: flex-start; }
-  .form-note {
-    font-size: 0.78rem;
-    color: var(--ink-soft);
+
+  .form-status {
+    font-size: 0.85rem;
+    padding: 0.75em 1em;
+    border-radius: var(--radius);
     margin: 0;
   }
-  .form-note code {
-    font-family: var(--font-mono);
-    background: var(--stone);
-    padding: 0.1em 0.35em;
-    border-radius: 3px;
+  .form-status.success {
+    background: color-mix(in srgb, green 15%, transparent);
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+  }
+  .form-status.error {
+    background: color-mix(in srgb, var(--rust) 15%, transparent);
+    color: var(--rust);
+    border: 1px solid var(--rust);
   }
 
   .map { padding-block: clamp(3rem, 7vw, 5rem); }
