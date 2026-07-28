@@ -9,12 +9,8 @@ const timeline = [
   { year: "2023", title: "Youth delegation programme", copy: "IGYM sends its first youth delegates to observe geohazard policy briefings, pairing students with mentors from partner institutions." },
   { year: "2026", title: "142 chapters, 46 countries", copy: "The movement crosses 6,800 members, with alumni now teaching, researching, and coordinating disaster response worldwide." },
 ];
-
-const structure = [
-  { layer: "Global council", fill: "#263C49", copy: "Eight elected youth leaders, one per world region, setting shared standards and holding the annual assembly." },
-  { layer: "Regional coordinators", fill: "#4E7C6C", copy: "Volunteers supporting 4–12 chapters each, translating global resources and running olympiad selection trials." },
-  { layer: "Local chapters", fill: "#B24F2C", copy: "Student-run groups at schools and universities — the layer where fieldwork, workshops, and outreach actually happen." },
-];
+import img8 from "../media/img8.jpeg"
+import img99 from "../media/image 99.png"
 
 const values = [
   { title: "Field over lecture", copy: "If it can be measured outdoors, we go outdoors. Labs are built around real outcrops, rivers, and instruments wherever possible." },
@@ -36,6 +32,11 @@ const values = [
 
   <FaultLine from="var(--stone)" to="var(--paper)" />
 
+
+  
+
+ 
+
   <section class="mission" style="background: var(--paper);">
     <div class="container mission-inner">
       <div>
@@ -43,44 +44,32 @@ const values = [
         <h2>Promoting Inquiry-Based Earth Science Learning</h2>
         <p>To spread inquiry-based Cognitive learning in Earth Science education built upon the Earth Systems Approach, ensuring access to environmental education at all school levels and in all parts of the world. Creating transformative opportunities for young individuals to engage with nature, cultures and people in such a way as to promote care and responsibility towards Earth Science Education System. </p>
       </div>
-      <!-- <div>
-        <p class="eyebrow">Partnership with IGEO</p>
-        <h2>Built by olympiad alumni, open to everyone.</h2>
-        <p>IGYM was founded by former International Geoscience Olympiad (IGEO) competitors and remains close to that community — many regional coordinators are IGEO alumni or current national-team mentors. Membership, though, is open to any student with curiosity about the earth, whether or not they've ever sat an olympiad paper.</p>
-      </div> -->
-    </div>
-  </section>
-
-  <FaultLine from="var(--paper)" to="var(--stone)" />
-
-  <section class="structure">
-    <div class="container">
-      <p class="eyebrow">How we're organised</p>
-      <h2>Three layers, like the ground beneath us.</h2>
-      <div class="structure-grid">
-        {structure.map((s) => (
-          <div class="structure-row">
-            <span class="structure-swatch" style={{ background: s.fill }}></span>
-            <div>
-              <h3>{s.layer}</h3>
-              <p>{s.copy}</p>
-            </div>
-          </div>
-        ))}
+      <div class="mission-photo">
+        <img src={img8.src} alt="I-GYM students in the field" />
       </div>
     </div>
   </section>
 
-  
+<section class="coming-soon" style="background: var(--paper);">
+    <div class="container coming-soon-inner">
+      <p class="eyebrow">Coming soon</p>
+      <h2>nNewsletter & Stories</h2>
+      <p style="text-align: justify;">
+Stay connected with the latest from IGYM. Discover inspiring stories from our members, explore blogs on Earth science and outreach, and be the first to hear about new initiatives, events, and opportunities through our newsletter.      </p>
+      <span class="coming-soon-badge">In progress</span>
+    </div>
+  </section> 
 
   <section class="values" style="background: var(--paper);">
-    <div class="container">
-      <p class="eyebrow">What we hold to</p>
-      <h2>Our values, in practice.</h2>
-      
-       <div>
-        
-        <p style="text-align: justify;">At I-GYM, we inspire curiosity through the Earth Systems Approach and the "Stimulating the Learning Instinct" technique. Our youth leaders engage in various outreach programs and hands-on workshops that prepare them to become ambassadors of Earth Science Education. Through interactive learning experiences in schools, universities, and educational institutions, we nurture informed, empathetic, and responsible global citizens with a strong appreciation for our planet.</p></div>
+    <div class="container values-inner">
+      <div>
+        <p class="eyebrow">What we hold to</p>
+        <h2>Our values, in practice.</h2>
+        <p style="text-align: justify;">At I-GYM, we inspire curiosity through the Earth Systems Approach and the "Stimulating the Learning Instinct" technique. Our youth leaders engage in various outreach programs and hands-on workshops that prepare them to become ambassadors of Earth Science Education. Through interactive learning experiences in schools, universities, and educational institutions, we nurture informed, empathetic, and responsible global citizens with a strong appreciation for our planet.</p>
+      </div>
+      <div class="values-photo">
+        <img src={img99.src} alt="I-GYM youth leaders in a workshop" />
+      </div>
     </div>
   </section>
 </Layout>
@@ -89,39 +78,50 @@ const values = [
   .intro { padding-block: clamp(3rem, 7vw, 5rem); }
   .intro-inner .lede { font-size: var(--step-1); max-width: 60ch; }
 
+  .coming-soon { padding-block: clamp(2.5rem, 6vw, 4rem); }
+  .coming-soon-inner {
+    max-width: 60ch;
+    text-align: center;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .coming-soon-inner h2 { margin-top: 0.25rem; }
+  .coming-soon-badge {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid var(--ochre);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    color: var(--ochre);
+    text-transform: uppercase;
+  }
+
   .mission { padding-block: clamp(3rem, 7vw, 5rem); }
   .mission-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
+    align-items: center;
   }
-
-  .structure { padding-block: clamp(3rem, 7vw, 5rem); }
-  .structure-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    margin-top: 2.5rem;
-  }
-  .structure-row {
-    display: grid;
-    grid-template-columns: 14px 1fr;
-    gap: 1.5rem;
-    align-items: start;
-    padding: 1.5rem;
-    background: var(--paper);
-    border: 1px solid var(--line);
+  .mission-photo {
+    min-height: 320px;
     border-radius: var(--radius);
+    background: var(--stone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
-  .structure-swatch {
-    width: 14px;
+  .mission-photo img {
+    width: 100%;
     height: 100%;
-    min-height: 3rem;
-    border-radius: 2px;
-    margin-top: 0.3rem;
+    object-fit: cover;
   }
-  .structure-row h3 { margin-bottom: 0.35rem; font-size: var(--step-1); }
-  .structure-row p { margin: 0; max-width: 60ch; }
 
   .timeline { padding-block: clamp(3rem, 7vw, 5rem); }
   .timeline-list {
@@ -146,16 +146,32 @@ const values = [
   .timeline-row p { margin: 0; max-width: 58ch; }
 
   .values { padding-block: clamp(3rem, 7vw, 5rem); }
-  .values-grid {
+  .values-inner {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-top: 2.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .values-photo {
+    min-height: 320px;
+    border-radius: var(--radius);
+    background: var(--stone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .values-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   @media (max-width: 900px) {
     .mission-inner { grid-template-columns: 1fr; }
-    .values-grid { grid-template-columns: 1fr; }
+    .mission-photo { order: -1; min-height: 240px; }
+    .values-inner { grid-template-columns: 1fr; }
+    .values-photo { order: -1; min-height: 240px; }
     .timeline-row { grid-template-columns: 70px 1fr; }
   }
 </style>

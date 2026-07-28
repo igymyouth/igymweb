@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import FaultLine from "../components/FaultLine.astro";
 
-
 // Each member optionally supports a bio field for chapters that want to add
 // short profiles later, e.g. { name: "...", bio: "..." }
 import { db } from "../lib/firebase.js";
@@ -59,15 +58,28 @@ const totalMembers = chapters.reduce((sum, c) => sum + c.members.length, 0);
     </div>
   </section>
 
-  <section class="cta dark">
-    <div class="container cta-inner">
-      <div>
-        <p class="eyebrow">Want to be on this page?</p>
-        <h2>Chapters are always looking for their next coordinator.</h2>
-      </div>
-      <a href="/get-involved" class="btn btn-primary">See open roles</a>
+
+<section class="stories-teaser" style="background: var(--paper);">
+  <div class="container stories-teaser-inner">
+    <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+    <p class="eyebrow">Coming soon</p>
+    <h2>Stories from the field.</h2>
+    <p>We're collecting first-hand stories from students across our chapters — what I-GYM has meant to them, the mapping trips, the late-night olympiad prep, the friendships across borders. Soon, this is where you'll read them.</p>
+  </div>
+</section>
+
+<FaultLine from="var(--paper)" to="var(--slate)" />
+
+<section class="cta dark">
+  <div class="container cta-inner">
+    <div>
+      <p class="eyebrow">Want to be part of I-GYM?
+</p>
+      <h2>Whether you're joining a chapter, starting one, or simply exploring Earth sciences, we'd love to hear from you.</h2>
     </div>
-  </section>
+    <a href="/get-involved" class="btn btn-primary">Get Started</a>
+  </div>
+</section>
 </Layout>
 
 <style>
@@ -123,6 +135,46 @@ const totalMembers = chapters.reduce((sum, c) => sum + c.members.length, 0);
     color: var(--ink-soft);
   }
 
+  .stories-teaser {
+    position: relative;
+    background: var(--rust);
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+    overflow: hidden;
+  }
+  .stories-teaser-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+  .stories-teaser .eyebrow {
+    color: var(--paper);
+    opacity: 0.85;
+  }
+  .stories-teaser h2 {
+    color: var(--paper);
+    margin-block: 0.75rem 1rem;
+    font-size: var(--step-3, 2rem);
+  }
+  .stories-teaser p {
+    color: var(--paper);
+    opacity: 0.9;
+  }
+  .quote-mark {
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Georgia, serif;
+    font-size: 14rem;
+    line-height: 1;
+    color: var(--paper);
+    opacity: 0.12;
+    pointer-events: none;
+    user-select: none;
+  }
+
   .cta { padding-block: clamp(2.5rem, 6vw, 4rem); }
   .cta-inner {
     display: flex;
@@ -139,4 +191,40 @@ const totalMembers = chapters.reduce((sum, c) => sum + c.members.length, 0);
   @media (max-width: 700px) {
     .chapter-grid { grid-template-columns: 1fr; }
   }
+  .stories-teaser {
+  position: relative;
+  padding-block: clamp(3rem, 7vw, 5rem);
+  overflow: hidden;
+}
+.stories-teaser-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+.stories-teaser .eyebrow {
+  color: var(--rust);
+}
+.stories-teaser h2 {
+  color: var(--ink);
+  margin-block: 0.75rem 1rem;
+  font-size: var(--step-3, 2rem);
+}
+.stories-teaser p {
+  color: var(--ink-soft);
+}
+.quote-mark {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Georgia, serif;
+  font-size: 14rem;
+  line-height: 1;
+  color: var(--rust);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+}
 </style>

@@ -3,48 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import FaultLine from "../components/FaultLine.astro";
 
 const upcoming = [
-  {
-    date: "12–14 Sep 2026",
-    title: "Southeast Asia Mapping Camp",
-    type: "Fieldwork",
-    location: "Yogyakarta, Indonesia",
-    copy: "Three days of volcanic-terrain mapping and hazard surveying with chapters from Indonesia, Malaysia, and the Philippines.",
-  },
-  {
-    date: "3 Oct 2026",
-    title: "European Olympiad Selection Trial",
-    type: "Olympiad",
-    location: "Kraków, Poland (+ online)",
-    copy: "Written and practical rounds for students hoping to join national IGEO teams from Central and Eastern Europe.",
-  },
-  {
-    date: "21 Nov 2026",
-    title: "Global Open Chapter Day",
-    type: "Workshop",
-    location: "All chapters, worldwide",
-    copy: "Every chapter runs the same rock-identification and mini-seismology lab on the same day, then shares results on the map wall.",
-  },
-  {
-    date: "15–18 Jan 2027",
-    title: "IGYM Annual Assembly",
-    type: "Assembly",
-    location: "Accra, Ghana",
-    copy: "Coordinators from all six regions meet to set the year's shared curriculum and elect two new global council seats.",
-  },
-  {
-    date: "9 Feb 2027",
-    title: "South America Fault-Line Fieldwork Day",
-    type: "Fieldwork",
-    location: "Santiago, Chile",
-    copy: "A joint outing with university geology departments to log surface rupture evidence along the region's active faults.",
-  },
 ];
 
 const past = [
-  { date: "Aug 2025", title: "North America Glaciology Camp", location: "Banff, Canada" },
-  { date: "May 2025", title: "IGEO 2025 send-off & scrimmage", location: "Online, all regions" },
-  { date: "Feb 2025", title: "West Africa Hydrogeology Workshop", location: "Dakar, Senegal" },
-  { date: "Nov 2024", title: "IGYM Annual Assembly", location: "Wellington, New Zealand" },
+  { date: "July 2025", title: "I-GYM'25", location: "Bangalore, India" },
+  
 ];
 
 const typeColor: Record<string, string> = {
@@ -60,15 +23,14 @@ const typeColor: Record<string, string> = {
       <p class="eyebrow">Events</p>
       <h1>Next on the calendar.</h1>
       <p class="lede">
-        Regional camps, olympiad trials, workshops, and the annual assembly — logged here as they're
-        confirmed. Most events welcome visitors from other chapters; check each listing for details.
+       Explore workshops, outreach programs, field excursions, webinars, chapter activities, expert talks, and international collaborations that bring young Earth scientists together to learn, lead, and inspire change.
       </p>
     </div>
   </section>
 
   <FaultLine from="var(--stone)" to="var(--paper)" />
 
-  <section class="upcoming" style="background: var(--paper);">
+  <!-- <section class="upcoming" style="background: var(--paper);">
     <div class="container">
       <p class="eyebrow">Upcoming</p>
       <ul class="event-list">
@@ -88,7 +50,36 @@ const typeColor: Record<string, string> = {
         ))}
       </ul>
     </div>
-  </section>
+  </section> -->
+  <section class="upcoming" style="background: var(--paper);">
+  <div class="container">
+    <p class="eyebrow">Upcoming</p>
+    {upcoming.length > 0 ? (
+      <ul class="event-list">
+        {upcoming.map((e) => (
+          <li class="event-row">
+            <div class="event-date">{e.date}</div>
+            <div class="event-body">
+              <div class="event-head">
+                <h3>{e.title}</h3>
+                <span class="tag" style={{ color: typeColor[e.type], borderColor: typeColor[e.type] }}>{e.type}</span>
+              </div>
+              <p class="event-location">{e.location}</p>
+              <p>{e.copy}</p>
+            </div>
+            <a href="/get-involved" class="btn btn-ghost event-cta">Register interest</a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="empty-state">
+        <h3>More events coming soon.</h3>
+        <p>We're finalizing the calendar for upcoming workshops, seminars & many more. Check back soon, or get involved to be notified first.</p>
+        <a href="/get-involved" class="btn btn-ghost">Get notified</a>
+      </div>
+    )}
+  </div>
+</section>
 
   <FaultLine from="var(--paper)" to="var(--slate)" />
 
@@ -113,16 +104,29 @@ const typeColor: Record<string, string> = {
   <section class="cta">
     <div class="container cta-inner">
       <div>
-        <p class="eyebrow">Hosting something?</p>
-        <h2>Tell us about your chapter's event.</h2>
-        <p>If your chapter is running a workshop, camp, or trial, let the global council know and we'll list it here for other chapters to join.</p>
+        <p class="eyebrow">Take the first step.</p>
+        <h2></h2>
+        <p>Join I-GYM to participate in workshops, field trips, outreach initiatives, leadership programs, and a growing international community of young Earth leaders.</p>
       </div>
-      <a href="/get-involved" class="btn btn-primary">Submit an event</a>
+      <a href="/get-involved" class="btn btn-primary">Get Involved</a>
     </div>
   </section>
 </Layout>
 
 <style>
+  .empty-state {
+  text-align: center;
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  max-width: 48ch;
+  margin: 0 auto;
+}
+.empty-state h3 {
+  margin-bottom: 0.75rem;
+}
+.empty-state p {
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+}
   .intro { padding-block: clamp(3rem, 7vw, 5rem); }
   .intro .lede { font-size: var(--step-1); max-width: 58ch; }
 
