@@ -301,7 +301,6 @@ for the next generation of Earth science leaders. </p>
   .log-head { position: relative; }
   .log-swiper .swiper-wrapper { flex-wrap: nowrap; }
   .log-swiper .swiper-slide {
-    width: 100% !important;
     flex-shrink: 0;
     height: 100%;
   }
@@ -470,6 +469,7 @@ for the next generation of Earth science leaders. </p>
     new Swiper('.log-swiper', {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
+      roundLengths: true,
       autoplay: { delay: 4000, disableOnInteraction: false },
       pagination: { el: '.swiper-pagination', clickable: true },
       navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
