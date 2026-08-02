@@ -24,6 +24,35 @@ const { title, description = "IGYM is the International Geoscience Youth Movemen
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <script is:inline>
+      // Detect real flag-emoji glyph support (Windows in particular falls
+      // back to rendering the two raw "regional indicator" letters, e.g.
+      // "IN", instead of a ligatured flag). If the flag string measures
+      // ~2x the width of a single regional-indicator letter, it wasn't
+      // ligatured into one glyph, so we flag the OS as unsupported and
+      // let CSS swap in SVG flags instead. Runs synchronously in <head>
+      // so it's resolved before anything paints.
+      (function () {
+        try {
+          var canvas = document.createElement("canvas");
+          var ctx = canvas.getContext("2d");
+          if (!ctx) return;
+          ctx.font = "100px Arial";
+          var flag = "\u{1F1EE}\u{1F1F3}"; // 🇮🇳 as a two-codepoint sequence
+          var singleLetter = "\u{1F1EE}"; // just the "I" regional indicator
+          var flagWidth = ctx.measureText(flag).width;
+          var letterWidth = ctx.measureText(singleLetter).width;
+          var supportsFlags = flagWidth < letterWidth * 1.5;
+          if (!supportsFlags) {
+            document.documentElement.classList.add("no-flag-emoji");
+          }
+        } catch (e) {
+          // Fail open — leave emoji flags showing rather than assume the
+          // worst on an unexpected error.
+        }
+      })();
+    </script>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
