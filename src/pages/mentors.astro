@@ -1,0 +1,543 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FaultLine from "../components/FaultLine.astro";
+
+import mentor1 from "../media/mentor1.jpeg";
+import mentor2 from "../media/mentor2.jpeg";
+import mentor3 from "../media/mentor1.jpeg";
+---
+
+<Layout
+  title="Our Mentors"
+  description="Meet the mentors who support and guide I-GYM's young geoscience community."
+>
+
+  <!-- =========================
+       HERO
+       ========================= -->
+
+  <section class="intro">
+    <div class="container intro-inner">
+
+      <p class="eyebrow">Our Mentors</p>
+
+      <h1>
+        Guided by Experience.<br />
+        Driven by Curiosity.
+      </h1>
+
+      <p class="lede">
+      Behind every young scientist is someone who helps them ask better questions, explore new ideas, and see possibilities beyond the classroom. Our mentors bring together years of experience in geoscience, education, research, and scientific outreach to support the next generation of Earth scientists.
+      </p>
+
+    </div>
+  </section>
+
+  <FaultLine from="var(--stone)" to="var(--paper)" />
+
+
+  <!-- =========================
+       MENTOR 1
+       IMAGE LEFT — BIO RIGHT
+       ========================= -->
+
+  <section class="mentor">
+    <div class="container mentor-container">
+
+      <div class="mentor-heading">
+        <p class="eyebrow">Mentor</p>
+
+        <h2>Prof. Nir Orion</h2>
+
+        <p class="mentor-role">
+          Full Professor · Department of Science Teaching · Weizmann Institute of Science
+        </p>
+      </div>
+
+
+      <div class="mentor-bio-layout">
+
+        <div class="mentor-photo">
+          <img
+            src={mentor1.src}
+            alt="Prof. Nir Orion"
+          />
+        </div>
+
+        <div class="mentor-bio">
+
+          <p>
+            Prof. Nir Orion is a Full Professor in the Department of Science Teaching at the Weizmann Institute of Science and founder of its Earth and Environmental Sciences Education Group. He holds a BSc in Earth Sciences from the Hebrew University of Jerusalem and MSc and PhD degrees from the Weizmann Institute of Science.
+          </p>
+
+          <p>
+            For over four decades, he has dedicated his work to advancing Earth science education worldwide. He developed the Earth System Education Approach, promoting systems thinking, scientific thinking, environmental understanding, and meaningful learning. His Blue Planet Earth-system curriculum was adopted by UNESCO and disseminated internationally.
+          </p>
+
+          <p>
+            Prof. Orion initiated the International Geoscience Education Organization (IGEO) and has led major initiatives including GLESE and I-GYM. His contributions have earned international recognition, including the IUGS Science Excellence Award in Geological Education
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       MENTOR 2
+       BIO LEFT — IMAGE RIGHT
+       ========================= -->
+
+
+<section class="mentor mentor-alt mentor-reverse">
+  <div class="container mentor-container">
+
+    <div class="mentor-heading">
+      <p class="eyebrow">Mentor</p>
+
+      <h2>Prof. R. Shankar</h2>
+
+      <p class="mentor-role">
+        Adviser, IGEO · Coordinator, IESO · Earth Science Adviser, Prayoga Institute
+      </p>
+    </div>
+
+    <div class="mentor-bio-layout">
+
+      <div class="mentor-photo">
+        <img
+          src={mentor2.src}
+          alt="Prof. R. Shankar"
+        />
+      </div>
+
+      <div class="mentor-bio">
+
+        <p>
+          Prof. R. Shankar hails from Chitradurga in southern India, where he
+          completed his early education before pursuing an M.Sc. in Applied
+          Geology and a Ph.D. at IIT Bombay. He secured First Rank and was
+          awarded the Institute Medal and Institute Notional Prize. In
+          1991–92, he was a Commonwealth Academic Staff Fellow at the
+          University of Edinburgh.
+        </p>
+
+        <p>
+          Although selected for a Class 1 position at the Geological Survey of
+          India, his passion for teaching and research led him to join
+          Mangalore University as a Lecturer in 1980. His experiences with
+          both effective and ineffective approaches to teaching shaped his
+          strong commitment to experiential learning and Earth Science
+          Education. Over the years, he has conducted workshops, exhibitions,
+          and public outreach programmes to make Earth science accessible and
+          engaging for students and the wider community.
+        </p>
+
+        <p>
+          Prof. Shankar played an important role in the development of
+          international geoscience education. Through his association with
+          Prof. P. G. Cooray and the IUGS Commission on Geoscience Education
+          and Training, he was among the pioneers involved in establishing
+          the International Geoscience Education Organisation (IGEO). He has
+          contributed extensively to the International Earth Science Olympiad
+          (IESO), serving IGEO as Vice-Chair, Chair, Past Chair, and Advisor.
+          He has received the National Mineral Award, Sir C. V. Raman Award,
+          and Young Scientist Award, and has published more than 85 refereed
+          research articles after visiting 26 countries.
+        </p>
+
+        <p>
+          Currently, he serves as Adviser to IGEO, Coordinator for IESO,
+          Advisor for Earth Science at Prayoga Institute, a member of the
+          NCERT Science Curricular Area Group, and a Trustee of GRAMA. Within
+          I-GYM, Prof. Shankar brings decades of experience in Earth Science
+          education, international Olympiad programmes, research, and
+          experiential learning, offering students and young learners a
+          valuable perspective on exploring Earth science beyond the
+          classroom.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+  <!-- =========================
+       MENTOR 3
+       IMAGE LEFT — BIO RIGHT
+       ========================= -->
+
+  <!-- <section class="mentor">
+    <div class="container mentor-container">
+
+      <div class="mentor-heading">
+        <p class="eyebrow">Mentor</p>
+
+        <h2>Mentor Name</h2>
+
+        <p class="mentor-role">
+          Professor / Researcher · Institution
+        </p>
+      </div>
+
+
+      <div class="mentor-bio-layout">
+
+        <div class="mentor-photo">
+          <img
+            src={mentor3.src}
+            alt="Mentor Name"
+          />
+        </div>
+
+        <div class="mentor-bio">
+
+          <p>
+            Write approximately 300 words about the third mentor. Introduce
+            their background, academic interests, professional experience,
+            and relationship with Earth Science or related disciplines.
+          </p>
+
+          <p>
+            Highlight their contributions to education, research, scientific
+            outreach, or international collaboration. Include any particularly
+            relevant experience that demonstrates why they are an important
+            mentor for young geoscience enthusiasts.
+          </p>
+
+          <p>
+            End with their contribution to I-GYM and the ways in which their
+            mentorship helps students develop scientific curiosity, practical
+            skills, and a broader understanding of Earth's interconnected
+            systems.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section> -->
+
+
+  <!-- =========================
+       CLOSING
+       ========================= -->
+
+  <section class="closing">
+    <div class="container closing-inner">
+
+      <p class="eyebrow">Learning beyond the classroom</p>
+
+      <h2>Experience meets curiosity.</h2>
+
+      <p>
+        Our mentors help turn questions into exploration, ideas into action,
+        and young curiosity into meaningful scientific learning.
+      </p>
+
+    </div>
+  </section>
+
+</Layout>
+
+
+<style>
+
+  /* =========================
+     HERO
+     ========================= */
+
+  .intro {
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .intro-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  .intro-inner h1 {
+    max-width: 1050px;
+    margin-top: 0.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .intro-inner .lede {
+    max-width: 800px;
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+
+
+  /* =========================
+     MENTOR SECTION
+     ========================= */
+
+  .mentor {
+    padding-block: clamp(4rem, 7vw, 6rem);
+    background: var(--paper);
+  }
+
+  .mentor-alt {
+    background: var(--stone);
+  }
+
+  .mentor-container {
+    max-width: 1300px;
+    margin-inline: auto;
+  }
+
+
+  /* =========================
+     MENTOR HEADING
+     ========================= */
+
+  .mentor-heading {
+    margin-bottom: 2.75rem;
+  }
+
+  .mentor-heading h2 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .mentor-role {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--ochre);
+  }
+
+
+  /* =========================
+     IMAGE + BIOGRAPHY
+     ========================= */
+
+  .mentor-bio-layout {
+    display: grid;
+
+    /*
+      Image width | Biography width
+    */
+    grid-template-columns: 500px minmax(0, 1fr);
+
+    gap: clamp(3rem, 5vw, 5rem);
+
+    /*
+      IMPORTANT:
+      This centers the image against
+      the biography only.
+    */
+    align-items: center;
+
+    width: 100%;
+  }
+
+
+  /* =========================
+     IMAGE
+     ========================= */
+
+  .mentor-photo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .mentor-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+
+    /*
+      Do NOT crop the photograph.
+    */
+    object-fit: contain;
+
+    border-radius: var(--radius);
+  }
+
+
+  /* =========================
+     BIOGRAPHY
+     ========================= */
+
+  .mentor-bio {
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .mentor-bio p {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+
+    line-height: 1.55;
+
+    text-align: justify;
+  }
+
+  .mentor-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+
+  /* =========================
+     ALTERNATE LAYOUT
+     ========================= */
+
+  /*
+    Default:
+
+    IMAGE | BIO
+
+    mentor-reverse:
+
+    BIO | IMAGE
+  */
+
+  .mentor-reverse .mentor-bio-layout {
+    grid-template-columns: minmax(0, 1fr) 500px;
+  }
+
+  .mentor-reverse .mentor-photo {
+    order: 2;
+  }
+
+  .mentor-reverse .mentor-bio {
+    order: 1;
+  }
+
+
+  /* =========================
+     CLOSING
+     ========================= */
+
+  .closing {
+    padding-block: clamp(4rem, 7vw, 6rem);
+    background: var(--paper);
+  }
+
+  .closing-inner {
+    max-width: 700px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .closing-inner h2 {
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .closing-inner p:last-child {
+    line-height: 1.6;
+  }
+
+
+  /* =========================
+     LAPTOP
+     ========================= */
+
+  @media (max-width: 1100px) {
+
+    .mentor-container {
+      max-width: 900px;
+    }
+
+    .mentor-bio-layout {
+      grid-template-columns: 400px minmax(0, 1fr);
+      gap: 3rem;
+    }
+
+    .mentor-reverse .mentor-bio-layout {
+      grid-template-columns: minmax(0, 1fr) 400px;
+    }
+
+  }
+
+
+  /* =========================
+     TABLET
+     ========================= */
+
+  @media (max-width: 850px) {
+
+    .intro-inner {
+      max-width: 100%;
+    }
+
+    .intro-inner h1 {
+      max-width: 800px;
+    }
+
+    .mentor-bio-layout,
+    .mentor-reverse .mentor-bio-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    /*
+      On mobile, always show image first.
+    */
+    .mentor-reverse .mentor-photo {
+      order: 1;
+    }
+
+    .mentor-reverse .mentor-bio {
+      order: 2;
+    }
+
+    .mentor-photo {
+      max-width: 550px;
+    }
+
+    .mentor-bio {
+      max-width: 100%;
+    }
+
+  }
+
+
+  /* =========================
+     MOBILE
+     ========================= */
+
+  @media (max-width: 600px) {
+
+    .intro {
+      padding-block: 3.5rem;
+    }
+
+    .mentor {
+      padding-block: 3.5rem;
+    }
+
+    .mentor-heading {
+      margin-bottom: 2rem;
+    }
+
+    .mentor-role {
+      font-size: 0.72rem;
+    }
+
+    .mentor-bio p {
+      text-align: left;
+    }
+
+    .closing {
+      padding-block: 3.5rem;
+    }
+
+  }
+
+</style>
