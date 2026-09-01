@@ -116,8 +116,9 @@ const chapterMarkers = snapshot.docs.map((doc) => {
           <p class="eyebrow--nolinedash"> I-GYM — International Geoscience Youth Movement</p>
           <h1>We're the Youth<br /> Leaders of Earth Science Education</h1>
           <p class="hero-lede">
-            I-GYM program was launched during IESO 2024, and since then, we have been committed to driving meaningful change in the growth of Earth Science Education System (ESE) through inquiry based learning. We are proud to welcome many more passionate young leaders who share our vision of transforming the future of geosciences.
-          </p>
+I-GYM program, a flagship initiative of the International Geoscience Education Organisation (IGEO) was launched during IESO 2024, and since then, we have been committed to driving meaningful change in the growth of Earth Science Education System (ESE) through inquiry based learning.
+<br>
+We are proud to welcome many more passionate young leaders who share our vision of transforming the future of geosciences.        </p>
           <div class="hero-actions">
             <a href="/events" class="btn btn-ghost">See upcoming events</a>
           </div>
@@ -301,10 +302,10 @@ const chapterMarkers = snapshot.docs.map((doc) => {
     gap: 3rem;
   }
 
-  .log-head { position: relative; }
+  .log-head { position: relative; min-width: 0; }
   .log-swiper .swiper-wrapper { flex-wrap: nowrap; }
   .log-swiper .swiper-slide {
-    width: 100% !important;
+    width: 100%;
     flex-shrink: 0;
     height: 100%;
   }
@@ -547,6 +548,7 @@ const chapterMarkers = snapshot.docs.map((doc) => {
     new Swiper('.log-swiper', {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
+      roundLengths: true,
       autoplay: { delay: 4000, disableOnInteraction: false },
       pagination: { el: '.log-swiper .swiper-pagination', clickable: true },
       navigation: { nextEl: '.log-swiper .swiper-button-next', prevEl: '.log-swiper .swiper-button-prev' },
