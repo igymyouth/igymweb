@@ -17,12 +17,6 @@ import img6 from "../media/img6.jpeg"
 import img7 from "../media/img7.jpeg"
 import img8 from "../media/img8.jpeg"
 
-// ---- TOGGLE THIS ----
-// true  = show the "Inaugurate" splash screen (use this for the ceremony)
-// false = skip straight to the normal homepage (use this while developing)
-const SHOW_INAUGURATION = false;
-// ----------------------
-
 const log = [
   { k: "Founded", v: "2023" },
   { k: "Launched", v: "August 2024" },
@@ -41,6 +35,63 @@ const logImages = [
   { src: img8.src},
 ];
 
+const reflections = [
+  {
+    quote: "The journey began by cultivating the habit of asking questions, encouraging us to think critically and explore the world around us.",
+    author: "Aswatha Biju",
+    role: "I-GYM 2025 Participant",
+    country: "India"
+  },
+  {
+    quote: "I-GYM 2026 was not only an educational experience but also a journey of inspiration, teamwork, and personal growth — a wonderful opportunity to learn, connect, and grow.",
+    author: "Sarasi",
+    role: "I-GYM 2026 Participant",
+    country: "Sri Lanka"
+  },
+  {
+    quote: "As a law student, this experience reminded me that Earth Science is not limited to scientists alone.",
+    author: "Archana Gunawardhana",
+    role: "I-GYM 2026 Participant",
+    country: "Sri Lanka"
+  },
+  {
+    quote: "I-GYM provided a seamless bridge between theoretical geology and real-world application. This interactive methodology significantly enhanced our critical thinking, data interpretation, and scientific inquiry skills.",
+    author: "Apamnidhi Pandey",
+    role: "I-GYM 2026 Participant",
+    country: "India"
+  },
+  {
+    quote: "Interacting with students from different regions and countries broadened my perspective.",
+    author: "Sanwariya Purbey",
+    role: "I-GYM 2026 Participant",
+    country: "India"
+  },
+  {
+    quote: "The emphasis on developing real-world skills, critical thinking, and experiential learning gave us a fresh perspective on geology and its applications.",
+    author: "Hirini",
+    role: "I-GYM 2026 Participant",
+    country: "Sri Lanka"
+  },
+  {
+    quote: "It never felt like a typical class. We were actively encouraged to ask big questions, think critically about complex Earth processes, and explore real-world challenges.",
+    author: "Thenuki",
+    role: "I-GYM 2026 Participant",
+    country: "Sri Lanka"
+  },
+  {
+    quote: "We learned a great deal about how geosciences are perceived in other countries and how we can all collectively work together to contribute to the cause.",
+    author: "Arush",
+    role: "I-GYM 2026 Participant",
+    country: "India"
+  },
+  {
+    quote: "The study of the Earth is also a study of humility, of learning our place within something vast and unhurried.",
+    author: "Kyishong Bharali Das",
+    role: "I-GYM 2026 Participant",
+    country: "India"
+  }
+];
+
 import { db } from "../lib/firebase.js";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -57,24 +108,7 @@ const chapterMarkers = snapshot.docs.map((doc) => {
 ---
 <Layout title="Home" description="IGYM is the International Geoscience Youth Movement — student chapters, IGEO olympiad training, and youth advocacy for earth science, in 46 countries.">
 
-  {SHOW_INAUGURATION && (
-    <div id="inaugurate-overlay">
-      <div class="stage-content">
-        <img src={LOGO.src} alt="IGYM Logo" class="stage-logo" />
-        <p class="eyebrow">International Geoscience Youth Movement</p>
-        <button id="inaugurate-btn" class="btn btn-primary">Inaugurate</button>
-      </div>
-    </div>
-
-    <canvas id="confetti-canvas"></canvas>
-    <audio
-      id="inaugurate-sound"
-      src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"
-      preload="auto"
-    ></audio>
-  )}
-
-  <div id="site-content" hidden={SHOW_INAUGURATION}>
+  <div id="site-content">
     <section class="hero">
       <Contours opacity={0.09} />
       <div class="container hero-inner">
@@ -130,11 +164,9 @@ We are proud to welcome many more passionate young leaders who share our vision 
         </div>
 
         <dl class="log-list">
-          <p style="font-family: var(--font-mono);
-      font-size: 1.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--ochre);">Milestones That Matter</p>
+          <p style="font-family: var(--font-mono); font-size: 1.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ochre);">
+            Milestones That Matter
+          </p>
           {log.map((row) => (
             <div class="log-row">
               <dt>{row.k}</dt>
@@ -145,7 +177,40 @@ We are proud to welcome many more passionate young leaders who share our vision 
       </div>
     </section>
 
-    <FaultLine from="var(--slate)" to="var(--stone)" flip />
+    <FaultLine from="var(--slate)" to="var(--paper)" flip />
+
+    <section class="reflections">
+      <div class="container">
+        <div class="reflections-header">
+          <p class="eyebrow">Voices of IGYM</p>
+          <h2>Participant Reflections</h2>
+        </div>
+
+        <div class="reflections-wrapper">
+          <div class="swiper reflections-swiper">
+            <div class="swiper-wrapper">
+              {reflections.map((item) => (
+                <div class="swiper-slide">
+                  <blockquote class="journal-card">
+                    <span class="quote-mark" aria-hidden="true">“</span>
+                    <p class="reflection-text">{item.quote}</p>
+                    <cite class="reflection-author">
+                      <span class="author-name">{item.author}</span>
+                      <span class="author-meta">{item.role} &mdash; {item.country}</span>
+                    </cite>
+                  </blockquote>
+                </div>
+              ))}
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <div class="swiper-button-prev reflections-prev"></div>
+          <div class="swiper-button-next reflections-next"></div>
+        </div>
+      </div>
+    </section>
+
+    <FaultLine from="var(--paper)" to="var(--stone)" />
 
     <section class="preview">
       <div class="container preview-inner">
@@ -158,71 +223,15 @@ We are proud to welcome many more passionate young leaders who share our vision 
         <div>
           <p class="eyebrow">Upcoming</p>
           <h2>Next on the calendar.</h2>
-          <p>Upcoming workshops, webinars & networking events
-for the next generation of Earth science leaders. </p>
+          <p>Upcoming workshops, webinars & networking events for the next generation of Earth science leaders.</p>
           <a href="/events" class="btn btn-ghost">View the calendar</a>
         </div>
       </div>
     </section>
   </div>
-
 </Layout>
 
 <style>
-  #inaugurate-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1s ease, visibility 1s ease;
-  }
-  #inaugurate-overlay.fade-out {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  #confetti-canvas {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  .stage-content {
-    text-align: center;
-    padding: 2rem;
-    transition: transform 0.6s ease, opacity 0.6s ease;
-  }
-  .stage-content.launched {
-    transform: scale(1.08);
-    opacity: 0;
-  }
-
-  .stage-logo {
-    width: min(60vw, 220px);
-    height: auto;
-    margin-bottom: 1.5rem;
-  }
-
-  .stage-content .eyebrow {
-    color: var(--ink-soft, #555);
-    font-family: var(--font-mono, monospace);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.85rem;
-    margin-bottom: 2rem;
-  }
-
-  #inaugurate-btn {
-    font-size: 1.3rem;
-    padding: 1em 2.5em;
-    cursor: pointer;
-  }
-
   .hero {
     position: relative;
     padding-block: clamp(3rem, 8vw, 6rem);
@@ -276,13 +285,6 @@ for the next generation of Earth science leaders. </p>
   }
 
   .pillars { padding-block: clamp(3rem, 7vw, 5rem); }
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
-  .pillar-card .tag { margin-bottom: 1rem; color: var(--rust); border-color: var(--rust); }
 
   #map {
     height: 420px;
@@ -331,9 +333,6 @@ for the next generation of Earth science leaders. </p>
     background: var(--paper, #fff);
     opacity: 1;
   }
-  .log-swiper .swiper-pagination-bullet-active {
-    opacity: 1;
-  }
 
   .log-list {
     margin: 0;
@@ -357,6 +356,140 @@ for the next generation of Earth science leaders. </p>
   }
   .log-row dd { margin: 0; color: var(--stone); }
 
+  /* --- Reflections Section Styling --- */
+  .reflections {
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+    background-color: var(--paper, #faf8f5);
+    position: relative;
+    width: 100%;
+  }
+
+  .reflections-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .reflections-wrapper {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 3.5rem;
+  }
+
+  .reflections-swiper {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 3rem !important;
+    --swiper-pagination-color: var(--rust, #b5563a);
+  }
+
+  .reflections-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .journal-card {
+    position: relative;
+    background: var(--stone, #f8f6f0);
+    border-radius: 12px;
+    padding: clamp(2rem, 4.5vw, 3.25rem);
+    box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .quote-mark {
+    position: absolute;
+    top: 0.5rem;
+    right: 1.5rem;
+    font-size: clamp(3.5rem, 6vw, 5rem);
+    line-height: 1;
+    font-family: Georgia, serif;
+    color: var(--rust, #b5563a);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .reflection-text {
+    font-size: clamp(0.92rem, 1.35vw, 1.02rem);
+    line-height: 1.7;
+    color: var(--ink, #1b2c36);
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reflection-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-style: normal;
+    border-top: 1px solid var(--line, rgba(0, 0, 0, 0.1));
+    padding-top: 1rem;
+  }
+
+  .author-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink, #1b2c36);
+  }
+
+  .author-meta {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--rust, #b5563a);
+  }
+
+  /* --- Floating Handles --- */
+  .reflections-prev,
+  .reflections-next {
+    color: var(--rust, #b5563a) !important;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 40px !important;
+    height: 40px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 50%;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                color 0.25s ease,
+                filter 0.25s ease;
+  }
+
+  .reflections-prev {
+    left: 0.25rem;
+  }
+
+  .reflections-next {
+    right: 0.25rem;
+  }
+
+  .reflections-prev::after,
+  .reflections-next::after {
+    font-size: 1.8rem !important;
+    font-weight: 800;
+  }
+
+  .reflections-prev:hover {
+    transform: translateY(-50%) translateX(-4px) scale(1.15);
+    filter: drop-shadow(-2px 4px 6px rgba(181, 86, 58, 0.3));
+  }
+
+  .reflections-next:hover {
+    transform: translateY(-50%) translateX(4px) scale(1.15);
+    filter: drop-shadow(2px 4px 6px rgba(181, 86, 58, 0.3));
+  }
+
+  .reflections-prev:active,
+  .reflections-next:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
   .preview { padding-block: clamp(3rem, 7vw, 5rem); }
   .preview-inner {
     display: grid;
@@ -364,22 +497,45 @@ for the next generation of Earth science leaders. </p>
     gap: 3rem;
   }
 
-  .cta { padding-block: clamp(2.5rem, 6vw, 4rem); }
-  .cta-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .cta-inner h2 { margin-bottom: 0; }
-
+  /* --- Responsive Breakpoints --- */
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; }
     .hero-visual { order: -1; }
-    .pillar-grid { grid-template-columns: 1fr; }
     .log-inner { grid-template-columns: 1fr; }
     .preview-inner { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .reflections-wrapper {
+      padding: 0;
+    }
+    
+    .reflections-prev,
+    .reflections-next {
+      top: auto;
+      bottom: 0;
+      transform: none;
+    }
+
+    .reflections-prev {
+      left: 20%;
+    }
+
+    .reflections-next {
+      right: 20%;
+    }
+
+    .reflections-prev:hover {
+      transform: translateX(-3px) scale(1.15);
+    }
+
+    .reflections-next:hover {
+      transform: translateX(3px) scale(1.15);
+    }
+
+    .journal-card {
+      padding: 1.5rem 1.25rem;
+    }
   }
 </style>
 
@@ -388,94 +544,23 @@ for the next generation of Earth science leaders. </p>
   import { Navigation, Pagination, Autoplay } from 'swiper/modules';
   import { Map, Marker, Popup, NavigationControl } from "maplibre-gl";
 
-  const btn = document.getElementById("inaugurate-btn");
-  const overlay = document.getElementById("inaugurate-overlay");
-  const stageContent = document.querySelector(".stage-content");
-  const siteContent = document.getElementById("site-content");
-  const canvas = document.getElementById("confetti-canvas") as HTMLCanvasElement | null;
-  const sound = document.getElementById("inaugurate-sound") as HTMLAudioElement | null;
-
-  // ---- Confetti (only set up if the overlay exists on this page) ----
-  let ctx: CanvasRenderingContext2D | null = null;
-  let particles: any[] = [];
-  let animationId: number | null = null;
-
-  if (canvas) {
-    ctx = canvas.getContext("2d");
-    function resizeCanvas() {
-      canvas!.width = window.innerWidth;
-      canvas!.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-  }
-
-  const colors = ["#d97b45", "#c76e3a", "#e0a840", "#3a7d6b", "#2f2a26", "#8fb8a8"];
-
-  function createParticle() {
-    return {
-      x: Math.random() * canvas!.width,
-      y: -20,
-      size: Math.random() * 8 + 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      speedY: Math.random() * 3 + 2,
-      speedX: Math.random() * 4 - 2,
-      rotation: Math.random() * 360,
-      rotationSpeed: Math.random() * 10 - 5,
-      shape: Math.random() > 0.5 ? "rect" : "circle",
-    };
-  }
-
-  function animate() {
-    if (!ctx || !canvas) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p) => {
-      p.y += p.speedY;
-      p.x += p.speedX;
-      p.rotation += p.rotationSpeed;
-      ctx!.save();
-      ctx!.translate(p.x, p.y);
-      ctx!.rotate((p.rotation * Math.PI) / 180);
-      ctx!.fillStyle = p.color;
-      if (p.shape === "rect") {
-        ctx!.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-      } else {
-        ctx!.beginPath();
-        ctx!.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-        ctx!.fill();
-      }
-      ctx!.restore();
-    });
-    particles = particles.filter((p) => p.y < canvas!.height + 30);
-    if (particles.length > 0) {
-      animationId = requestAnimationFrame(animate);
-    } else {
-      animationId = null;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-  }
-
-  function launchConfetti() {
-    if (!canvas) return;
-    for (let i = 0; i < 220; i++) particles.push(createParticle());
-    if (!animationId) animate();
-    let bursts = 0;
-    const interval = setInterval(() => {
-      for (let i = 0; i < 70; i++) particles.push(createParticle());
-      bursts++;
-      if (bursts > 7) clearInterval(interval);
-    }, 300);
-  }
-
-  // ---- Site init: map + carousel ----
   function initSite() {
     new Swiper('.log-swiper', {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
       roundLengths: true,
       autoplay: { delay: 4000, disableOnInteraction: false },
-      pagination: { el: '.swiper-pagination', clickable: true },
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      pagination: { el: '.log-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.log-swiper .swiper-button-next', prevEl: '.log-swiper .swiper-button-prev' },
+    });
+
+    new Swiper('.reflections-swiper', {
+      modules: [Navigation, Pagination, Autoplay],
+      loop: true,
+      spaceBetween: 40,
+      autoplay: { delay: 8000, disableOnInteraction: false },
+      pagination: { el: '.reflections-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.reflections-next', prevEl: '.reflections-prev' },
     });
 
     const mapEl = document.getElementById("map");
@@ -515,26 +600,5 @@ for the next generation of Earth science leaders. </p>
     }
   }
 
-  // ---- Wire the inaugurate button, if present ----
-  if (btn && overlay) {
-    btn.addEventListener("click", () => {
-      stageContent?.classList.add("launched");
-      launchConfetti();
-      sound?.play().catch(() => {});
-
-      setTimeout(() => {
-        overlay.classList.add("fade-out");
-      }, 200);
-
-      siteContent!.hidden = false;
-
-      setTimeout(() => {
-        overlay.remove();
-        initSite();
-      }, 1200);
-    });
-  } else {
-    // No overlay on this page (dev mode) — init the site immediately.
-    initSite();
-  }
+  initSite();
 </script>
